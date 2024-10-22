@@ -49,13 +49,11 @@ iffalse15:
   %sym22 = add i64 %n, 0
   %sym23 = add i64 1, 0
   %sym21 = sub i64 %sym22, %sym23
-  %sym19 = tail call i64 @fib(i64 %sym21)
-  ret i64 %sym19
+  %sym19 = call i64 @fib(i64 %sym21)
   %sym25 = add i64 %n, 0
   %sym26 = add i64 2, 0
   %sym24 = sub i64 %sym25, %sym26
-  %sym20 = tail call i64 @fib(i64 %sym24)
-  ret i64 %sym20
+  %sym20 = call i64 @fib(i64 %sym24)
   %sym18 = add i64 %sym19, %sym20
   store i64 %sym18, i64* %ifresult11, align 4
   br label %ifend17

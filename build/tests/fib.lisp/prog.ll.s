@@ -72,15 +72,38 @@ print:                                  # @print
 fib:                                    # @fib
 	.cfi_startproc
 # %bb.0:
+	push	r14
+	.cfi_def_cfa_offset 16
+	push	rbx
+	.cfi_def_cfa_offset 24
+	push	rax
+	.cfi_def_cfa_offset 32
+	.cfi_offset rbx, -24
+	.cfi_offset r14, -16
+	mov	rbx, rdi
 	cmp	rdi, 1
 	jg	.LBB2_2
 # %bb.1:                                # %iftrue14
-	mov	qword ptr [rsp - 8], rdi
-	mov	rax, qword ptr [rsp - 8]
-	ret
+	mov	qword ptr [rsp], rbx
+	jmp	.LBB2_3
 .LBB2_2:                                # %iffalse15
-	dec	rdi
-	jmp	fib                     # TAILCALL
+	lea	rdi, [rbx - 1]
+	call	fib
+	mov	r14, rax
+	add	rbx, -2
+	mov	rdi, rbx
+	call	fib
+	add	rax, r14
+	mov	qword ptr [rsp], rax
+.LBB2_3:                                # %ifend17
+	mov	rax, qword ptr [rsp]
+	add	rsp, 8
+	.cfi_def_cfa_offset 24
+	pop	rbx
+	.cfi_def_cfa_offset 16
+	pop	r14
+	.cfi_def_cfa_offset 8
+	ret
 .Lfunc_end2:
 	.size	fib, .Lfunc_end2-fib
 	.cfi_endproc
