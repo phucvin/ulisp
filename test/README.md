@@ -1,9 +1,9 @@
 cd ..
 
-node src/ulisp.js tests/fib.lisp --backend x86
+node src/ulisp.js tests/fib.lisp --backend x86 && time ./build/prog
 
-./build/prog
+fib in llvm is currently wrong
 
-llvm not working yet
+node src/ulisp.js tests/fib.lisp --backend llvm  && time ./build/prog
 
-node src/ulisp.js tests/fib.lisp --backend llvm
+node src/ulisp.js tests/print.lisp --backend llvm  && ./build/prog

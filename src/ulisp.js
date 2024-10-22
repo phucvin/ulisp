@@ -36,9 +36,9 @@ function main(args) {
   const program = backend.compile(ast);
 
   try {
-    fs.mkdirSync('build');
+    fs.mkdirSync('build/' + args[2], {recursive:true});
   } catch (e) {}
-  backend.build('build', program);
+  backend.build('build/' + args[2], program);
 }
 
 main(process.argv);

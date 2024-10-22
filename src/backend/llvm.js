@@ -251,9 +251,9 @@ module.exports.build = function(buildDir, program) {
   const prog = 'prog';
   fs.writeFileSync(buildDir + `/${prog}.ll`, program);
   cp.execSync(
-    `llc --x86-asm-syntax=intel -o ${buildDir}/${prog}.s ${buildDir}/${prog}.ll`,
+    `llc --x86-asm-syntax=intel -o ${buildDir}/${prog}.ll.s ${buildDir}/${prog}.ll`,
   );
-  cp.execSync(`gcc -o ${buildDir}/${prog} -masm=intel ${buildDir}/${prog}.s`);
+  cp.execSync(`gcc -o ${buildDir}/${prog} -masm=intel ${buildDir}/${prog}.ll.s`);
 };
 
 module.exports.TAIL_CALL_ENABLED = true;

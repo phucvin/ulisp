@@ -383,6 +383,6 @@ module.exports.build = function(buildDir, program) {
   const prog = 'prog';
   fs.writeFileSync(`${buildDir}/${prog}.s`, program);
   cp.execSync(
-    `gcc -mstackrealign -masm=intel -o ${buildDir}/${prog} ${buildDir}/${prog}.s`,
+    `gcc -mstackrealign -masm=intel -o ${buildDir}/${prog}.out ${buildDir}/${prog}.s`,
   );
 };
