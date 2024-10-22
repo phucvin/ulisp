@@ -347,7 +347,9 @@ class Compiler {
   }
 
   emitPrefix() {
+    this.emit(1, '.intel_syntax noprefix\n');
     this.emit(1, '.global _main\n');
+    this.emit(1, '.global main\n');
 
     this.emit(1, '.text\n');
   }
